@@ -1,0 +1,19 @@
+grep - filter by regular expression (Regex, text pattern) 
+. => can take place of any character
+^ (caret)=> the beginng of the line
+$ - end of the line
+/< - beginng of word
+/> - end of word
+? - the expression before can aquire 1 or 0 times
++ - at least 1 time
+* - any number number of occurences including 0
+{n,m} - between n and m appereances
+{m } - m given number of appearace 
+{m,} - at least m appereances
+{,m} - at most m appereances
+() - group expressions together
+[] - group charaters/sets of characters together  [123] , [1234567890] , [0-9] , [0-9a-zA-Z?*] - special characters
+have no longer special meaning, exception ^, this will negate the the brackets if is put in front
+[^0-9] - everything that is not a digit, if you want to use - you have to put \ in front of it \-
+| (pipe) - link multiple expressions with AND &&
+\ - cancel the special effects of other characters

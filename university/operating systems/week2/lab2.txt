@@ -1,0 +1,12 @@
+chmod
+-Wall - show all the warnings
+argc, argv- used for working with command line arguments
+argc- argument count - integer showing the arguments count
+argv - array of strings showing the arguments
+argument to contain space = use double quotes (put string in double qoutes "")
+                          = use \before space (\ is the cancel character - telling the command line
+                          interpretor to keep it as string)
+                          
+$PWD - path of your current directory
+
+to allocate memory - malloc (memory allocation) -used for arrays(stored in heap)

@@ -1,0 +1,30 @@
+.. - parent directory
+search function in manual:
+/"string" in manual (without quotes)
+/     - next occurence of the last string you search in the manual
+q - exit the manual
+break stuff in linux:
+touch
+mkdir
+cp
+mv
+rm
+how to open a file
+save the modification
+exit the editor
+open the editor  -empty : vim
+                - with path - vim <path> (dont provide directories to text editors)
+vim has two modes - command mode
+                  -insert mode (press I) (press ESC to exit from insert mode)
+Commands in vim:
+- :WQ - write and quit
+- :W - write (save the modification without exiting)
+- :Q! - quit(without saving the modifications)
+    If the file is not saved you write :WQ/:W file_name
+
+NANO Editor
+JOE editor(CTRL+K+H)
+
+
+file <path> - show what kind of file is(directory,ascii file (text), c programms)
+write the source code of hello world in c

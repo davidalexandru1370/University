@@ -1,0 +1,6 @@
+﻿  Repository.c
+C:\Users\David\source\repos\Project4\Repository.c(68,57): warning C4098: 'add_element_in_repository': 'void' function returning a value
+C:\Users\David\source\repos\Project4\Repository.c(122,48): warning C4013: 'find_element_with_name_repository' undefined; assuming extern returning int
+C:\Users\David\source\repos\Project4\Repository.c(96): warning C4716: 'get_element_in_repository': must return a value
+C:\Users\David\source\repos\Project4\Repository.c(185): warning C4716: 'repo_redo': must return a value
+  Project4.vcxproj -> C:\Users\David\source\repos\Project4\Debug\Project4.exe
