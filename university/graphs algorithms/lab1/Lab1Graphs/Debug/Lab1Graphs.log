@@ -1,2 +1,4 @@
-﻿  Console.cpp
-  Lab1Graphs.vcxproj -> C:\Users\David\Desktop\university\graphs algorithms\lab1\Lab1Graphs\Debug\Lab1Graphs.exe
+﻿  Graph.cpp
+C:\Users\David\Desktop\university\university\graphs algorithms\lab1\Lab1Graphs\Graph.cpp(204,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\graphs algorithms\lab1\Lab1Graphs\Graph.cpp(266,31): warning C4018: '<': signed/unsigned mismatch
+  Lab1Graphs.vcxproj -> C:\Users\David\Desktop\university\university\graphs algorithms\lab1\Lab1Graphs\Debug\Lab1Graphs.exe

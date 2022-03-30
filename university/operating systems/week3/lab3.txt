@@ -5,7 +5,7 @@ $ - end of the line
 /< - beginng of word
 /> - end of word
 ? - the expression before can aquire 1 or 0 times
-+ - at least 1 time
++ - at least 1 time	
 * - any number number of occurences including 0
 {n,m} - between n and m appereances
 {m } - m given number of appearace 

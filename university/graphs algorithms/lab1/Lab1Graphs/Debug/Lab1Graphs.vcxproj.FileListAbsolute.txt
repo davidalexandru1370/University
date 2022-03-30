@@ -1,2 +1,4 @@
 C:\Users\David\Desktop\university\graphs algorithms\lab1\Lab1Graphs\Debug\Lab1Graphs.exe
 C:\Users\David\Desktop\university\graphs algorithms\lab1\Lab1Graphs\Debug\Lab1Graphs.pdb
+C:\Users\David\Desktop\university\university\graphs algorithms\lab1\Lab1Graphs\Debug\Lab1Graphs.exe
+C:\Users\David\Desktop\university\university\graphs algorithms\lab1\Lab1Graphs\Debug\Lab1Graphs.pdb

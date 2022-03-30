@@ -1,0 +1,21 @@
+﻿  Tests.cpp
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\DynamicVector.h(47,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\DynamicVector.h(43): message : while compiling class template member function 'DynamicVector<int>::DynamicVector(const DynamicVector<int> &)'
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\Tests.cpp(17): message : see reference to function template instantiation 'DynamicVector<int>::DynamicVector(const DynamicVector<int> &)' being compiled
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\Tests.cpp(7): message : see reference to class template instantiation 'DynamicVector<int>' being compiled
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\DynamicVector.h(123,1): error C2440: 'return': cannot convert from 'T **' to 'T *'
+          with
+          [
+              T=int
+          ]
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\DynamicVector.h(123,9): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\DynamicVector.h(118): message : while compiling class template member function 'T *DynamicVector<T>::begin(void)'
+          with
+          [
+              T=int
+          ]
+C:\Users\David\Desktop\university\university\oop\seminar3\aaa\Tests.cpp(25): message : see reference to function template instantiation 'T *DynamicVector<T>::begin(void)' being compiled
+          with
+          [
+              T=int
+          ]

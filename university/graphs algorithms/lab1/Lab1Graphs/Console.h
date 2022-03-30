@@ -25,7 +25,9 @@ private:
 	void remove_a_node();
 	void remove_an_edge();
 	void add_a_new_node();
+	void print_number_of_edges();
 	Graph graph;
 	void print_all_graph();
+	void generate_random_graph();
 };
 

@@ -1,0 +1,5 @@
+﻿  SortedSet.cpp
+C:\Users\David\Desktop\university\university\data structures and algo\sortedset lab1\SortedSet\SortedSet.cpp(24,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\data structures and algo\sortedset lab1\SortedSet\SortedSet.cpp(34,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\data structures and algo\sortedset lab1\SortedSet\SortedSet.cpp(62,31): warning C4018: '<': signed/unsigned mismatch
+  SortedSet.vcxproj -> C:\Users\David\Desktop\university\university\data structures and algo\sortedset lab1\SortedSet\Debug\SortedSet.exe
