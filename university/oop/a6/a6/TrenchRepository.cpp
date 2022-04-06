@@ -6,6 +6,8 @@ TrenchRepository::TrenchRepository(int sz) : Repository{ sz }
 
 }
 
+TrenchRepository::~TrenchRepository() = default;
+
 int TrenchRepository::check_if_element_exists(Trench& element)
 {
 	for (size_t index = 0; index < data.get_length(); index++)

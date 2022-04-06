@@ -21,13 +21,13 @@ private:
 	void change_cost_between_two_nodes();
 	void print_const_between_two_nodes();
 	void read_graph_from_file();
-	void print_graph_to_file();
+	void print_graph_to_file(std::string file_name);
 	void remove_a_node();
 	void remove_an_edge();
 	void add_a_new_node();
 	void print_number_of_edges();
 	Graph graph;
 	void print_all_graph();
-	void generate_random_graph();
+	void generate_random_graph(std::string file_name);
 };
 

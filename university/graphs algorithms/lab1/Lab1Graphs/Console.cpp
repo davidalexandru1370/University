@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <chrono>
+#include <string>
 Console::Console(Graph _graph)
 {
 	graph = _graph;
@@ -32,6 +33,8 @@ void Console::print_menu()
 void Console::run_console()
 {
 	int running = 1;
+	//generate_random_graph("random_graph1.txt");
+	//generate_random_graph("random_graph2.txt");
 	while (running)
 	{
 		print_menu();
@@ -68,7 +71,7 @@ void Console::run_console()
 		}
 		else if (choice == 8)
 		{
-			print_graph_to_file();
+			print_graph_to_file("output.txt");
 		}
 		else if (choice == 9) {
 			print_all_graph();
@@ -98,7 +101,7 @@ void Console::run_console()
 			print_const_between_two_nodes();
 		}
 		else if (choice == 17) {
-			generate_random_graph();
+			generate_random_graph("output.txt");
 		}
 		else if (choice == 18) {
 			running = false;
@@ -271,16 +274,15 @@ void Console::print_const_between_two_nodes()
 
 void Console::read_graph_from_file()
 {
-	char file_name[] = "output.txt";
+	char file_name[] = "graph1k.txt";
 	auto start = std::chrono::high_resolution_clock::now();
 	graph.read_graph_from_file(file_name);
 	auto stop = std::chrono::high_resolution_clock::now();
 	printf("Total time = %d\n", std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count());
 }
 
-void Console::print_graph_to_file()
+void Console::print_graph_to_file(std::string file_name = "output.txt")
 {
-	char file_name[] = "output.txt";
 	std::ofstream file(file_name);
 	std::pair<std::vector<int>::iterator, std::vector<int>::iterator> nodes = graph.get_iterator_for_nodes();
 	if (nodes.first == nodes.second)
@@ -291,16 +293,26 @@ void Console::print_graph_to_file()
 		file << graph.get_number_of_nodes() << " " << graph.get_the_number_of_edges() << "\n";
 		for (std::vector<int>::iterator index = nodes.first; index < nodes.second; index++)
 		{
-			std::pair<std::vector<int>::iterator, std::vector<int>::iterator> edges = graph.get_iterator_for_outbounds_of_a_node(*index);
-			for (std::vector<int>::iterator edge = edges.first; edge < edges.second; edge++)
+			try
 			{
-				if (*edge == -1)
-				{
-					file << *index << " " << *edge << " " << 0 << "\n";
-					break;
-				}
-				file << *index << " " << *edge << " " << graph.get_the_cost_between_two_nodes(*index, *edge) << "\n";
+				std::pair<std::vector<int>::iterator, std::vector<int>::iterator> edges = graph.get_iterator_for_outbounds_of_a_node(*index);
+				
+					for (std::vector<int>::iterator edge = edges.first; edge < edges.second; edge++)
+					{
+						if (*edge == -1)
+						{
+							file << *index << " " << *edge << " " << 0 << "\n";
+							break;
+						}
+						file << *index << " " << *edge << " " << graph.get_the_cost_between_two_nodes(*index, *edge) << "\n";
+					}
+
 			}
+			catch (const std::exception&)
+			{
+				file << *index << " -1 0" << "\n";
+			}
+
 		}
 	}
 }
@@ -370,7 +382,7 @@ void Console::print_all_graph()
 	}
 }
 
-void Console::generate_random_graph()
+void Console::generate_random_graph(std::string file_name)
 {
 	int vertices, edges;
 	char text_file[100];
@@ -381,9 +393,11 @@ void Console::generate_random_graph()
 	try
 	{
 		graph.build_random_graph(vertices, edges);
+		print_graph_to_file(file_name);
 	}
 	catch (const std::exception& except)
 	{
-
+		std::ofstream file(file_name);
+		file << except.what();
 	}
 }

@@ -1,0 +1,2 @@
+C:\Users\David\Desktop\university\university\oop\test1warmup\Debug\test1warmup.exe
+C:\Users\David\Desktop\university\university\oop\test1warmup\Debug\test1warmup.pdb

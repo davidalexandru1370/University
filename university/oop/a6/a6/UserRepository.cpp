@@ -3,10 +3,7 @@
 
 UserRepository::UserRepository(int size) : Repository{ size } {}
 
-UserRepository::~UserRepository()
-{
-	delete& data;
-}
+UserRepository::~UserRepository(){}
 
 int UserRepository::check_if_element_exists(Trench& element)
 {

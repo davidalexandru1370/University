@@ -24,8 +24,8 @@ TrenchService::~TrenchService()
 	/// Trench destructor deletes  repositories
 	/// </summary>
 	/// <returns></returns>
-	delete repository;
-	delete user_repository;
+	//delete repository;
+	//delete user_repository;
 }
 
 void TrenchService::add_element(int size, char colour[], int price, int quantity, char photograph[])

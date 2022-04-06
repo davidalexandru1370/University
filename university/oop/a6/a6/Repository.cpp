@@ -21,18 +21,8 @@ Repository::Repository(int size)
 	/// <returns></returns>
 }
 
-void Repository::add_element(Trench element)
-{
-	///// <summary>
-	///// Add element in vector
-	///// </summary>
-	///// <param name="element">element to be added</param>
-	//if (check_if_element_exists(element) != -1)
-	//{
-	//	//throw std::exception();
-	//	return;
-	//}
-	//data->push_back(element);
+void Repository::add_element(Trench element){
+	return;
 }
 
 void Repository::remove_at(int index)

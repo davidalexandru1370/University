@@ -32,6 +32,7 @@ void Graph::add_edge(int node_from, int node_to, int cost)
 	edges_in[node_to].push_back(node_from);
 	edges_out[node_from].push_back(node_to);
 	costs[std::make_pair(node_from, node_to)] = cost;
+	number_of_edges++;
 }
 
 void Graph::add_node(int node)
@@ -66,7 +67,6 @@ void Graph::delete_edge(int node_from, int node_to)
 
 bool Graph::is_edge(int node_from, int node_to)
 {
-
 	if (edges_out.find(node_from) == edges_out.end() || edges_in.find(node_to) == edges_in.end())
 	{
 		return false;
@@ -76,13 +76,13 @@ bool Graph::is_edge(int node_from, int node_to)
 	{
 		return false;
 	}
-
 	return true;
 }
 
 int Graph::get_out_degree_of_node(int node)
 {
-	if (edges_out.find(node) == edges_out.end() || edges_out[node][0] == -1)
+	//if (edges_out.find(node) == edges_out.end() || edges_out[node][0] == -1)
+	if (check_if_node_exists(node) == false)
 	{
 		//return exception
 		//if node does not exists
@@ -94,7 +94,7 @@ int Graph::get_out_degree_of_node(int node)
 
 int Graph::get_in_degree_of_node(int node)
 {
-	if (edges_in.find(node) == edges_in.end())
+	if (check_if_node_exists(node) == false)
 	{
 		throw std::exception();
 	}
@@ -124,8 +124,8 @@ void Graph::remove_node(int node)
 		edges_in[vertex].erase(find(edges_in[vertex].begin(), edges_in[vertex].end(), node));
 		costs.erase(costs.find(std::make_pair(node, vertex)));
 	}
-
-	for (auto& vertex : edges_in[node])
+	
+	for (int& vertex : edges_in[node])
 	{
 		edges_out[vertex].erase(find(edges_out[vertex].begin(), edges_out[vertex].end(), node));
 		costs.erase(costs.find(std::make_pair(vertex, node)));
@@ -170,7 +170,6 @@ std::pair<std::vector<int>::iterator, std::vector<int>::iterator> Graph::get_ite
 	return std::make_pair(nodes.begin(), nodes.end());
 }
 
-
 std::pair<std::vector<int>::iterator, std::vector<int>::iterator> Graph::get_iterator_for_outbounds_of_a_node(int node)
 {
 	if (check_if_node_exists(node) == false)
@@ -194,13 +193,12 @@ void Graph::read_graph_from_file(char file_name[])
 {
 	std::ifstream file(file_name);
 	file >> number_of_nodes >> number_of_edges;
-	// -1 deleted vertex
-	/*for (size_t index = 0; index < number_of_nodes; index++)
+	for (size_t index = 0; index < number_of_nodes; index++)
 	{
 		edges_in[index] = std::vector<int>();
 		edges_out[index] = std::vector<int>();
 		nodes.push_back(index);
-	}*/
+	}
 	for (size_t index = 0; index < number_of_edges; index++)
 	{
 		int node1, node2, cost = 0;
@@ -209,16 +207,18 @@ void Graph::read_graph_from_file(char file_name[])
 		costs[std::make_pair(node1, node2)] = cost;*/
 		//edges_in[node2].push_back(node1);
 		//edges_out[node1].push_back(node2);
+		//in order to do not mark them as isolated nodes
 		if (node2 == -1)
 		{
 			edges_in[node1] = std::vector<int>();
 			edges_out[node1] = std::vector<int>();
 			edges_out[node1].push_back(node2);
 			edges_in[node1].push_back(node2);
-			nodes.push_back(node1);
-			deleted_nodes++;
+			costs[std::make_pair(node1, node2)] = 0;
+			//nodes.push_back(node1);
 			continue;
 		}
+		//std::cout << node1 << " " << node2 << "\n";
 		if (check_if_node_exists(node1) == false)
 		{
 			edges_in[node1] = std::vector<int>();
@@ -235,6 +235,7 @@ void Graph::read_graph_from_file(char file_name[])
 		if (is_edge(node1, node2) == false)
 		{
 			add_edge(node1, node2, cost);
+			number_of_edges--;
 		}
 	}
 }
@@ -242,7 +243,7 @@ void Graph::read_graph_from_file(char file_name[])
 int Graph::get_the_number_of_edges()
 {
 	//return costs.size();
-	return number_of_edges;
+	return costs.size();
 }
 
 int Graph::get_the_number_of_deleted_nodes()
@@ -251,8 +252,20 @@ int Graph::get_the_number_of_deleted_nodes()
 }
 
 bool Graph::check_if_node_exists(int node) {
-	return (std::find(nodes.begin(), nodes.end(), node) == nodes.end()) ? false : true;
-	
+	if (edges_out.find(node) != edges_out.end())
+	{
+		if (edges_out[node].size() > 0 && edges_out[node][0] == -1)
+		{
+			return false;
+		}
+	}
+	std::vector<int>::iterator it = std::find(nodes.begin(), nodes.end(), node);
+	if (it == nodes.end())
+	{
+		return false;
+	}
+
+	return true;
 	//return (edges_in.find(node) != edges_in.end() || edges_out.find(node) != edges_out.end());
 }
 
@@ -288,19 +301,3 @@ void Graph::build_random_graph(int vertices, int edges)
 		}
 	}
 }
-
-/*
-get the number of vertices; X
-parse (iterate) the set of vertices; X
-given two vertices, find out whether there is an edge from the first one to the second one, and retrieve the Edge_id if there is an edge (the latter is not required if an edge is represented simply as a pair of vertex identifiers); X
-get the in degree and the out degree of a specified vertex; X
-parse (iterate) the set of outbound edges of a specified vertex (that is, provide an iterator). For each outbound edge, the iterator shall provide the Edge_id of the curren edge (or the target vertex, if no Edge_id is used). X
-parse the set of inbound edges of a specified vertex (as above); X
-get the endpoints of an edge specified by an Edge_id (if applicable);
-retrieve or modify the information (the integer) attached to a specified edge. X
-The graph shall be modifiable: it shall be possible to add and remove an edge, and to add and remove a vertex. Think about what should happen with the properties of existing edges and with the identification of remaining vertices. You may use an abstract Vertex_id instead of an int in order to identify vertices; in this case, provide a way of iterating the vertices of the graph.
-The graph shall be copyable, that is, it should be possible to make an exact copy of a graph, so that the original can be then modified independently of its copy. Think about the desirable behaviour of an Edge_property attached to the original graph, when a copy is made.
-Read the graph from a text file (as an external function); see the format below. X
-Write the graph from a text file (as an external function); see the format below. X
-Create a random graph with specified number of vertices and of edges (as an external function).
-*/
