@@ -1,0 +1,13 @@
+﻿  Console.cpp
+  Main.cpp
+  Service.cpp
+C:\Users\David\Desktop\university\university\oop\test1\Service.cpp(76,53): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\David\Desktop\university\university\oop\test1\Service.cpp(77,56): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\David\Desktop\university\university\oop\test1\Service.cpp(78,66): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\David\Desktop\university\university\oop\test1\Service.cpp(79,55): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\David\Desktop\university\university\oop\test1\Service.cpp(80,64): warning C4305: 'argument': truncation from 'double' to 'float'
+  Tests.cpp
+C:\Users\David\Desktop\university\university\oop\test1\Tests.cpp(19,36): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\David\Desktop\university\university\oop\test1\Tests.cpp(31,36): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+  test1.vcxproj -> C:\Users\David\Desktop\university\university\oop\test1\Debug\test1.exe

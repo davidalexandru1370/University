@@ -1,7 +1,10 @@
 #include "UserRepository.h"
 #include "Vector.h"
 
-UserRepository::UserRepository() = default;
+UserRepository::UserRepository() {
+	file_name = new char[15];
+	strcpy(file_name, "user_in.txt");
+}
 
 UserRepository::~UserRepository(){}
 

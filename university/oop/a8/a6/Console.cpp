@@ -13,7 +13,7 @@ void Console::run_console()
 {
 	int running = 1;
 
-	service->generate_random_trenches(10);
+	//service->generate_random_trenches(10);
 	while (running)
 	{
 		while (type_of_user != 1 && type_of_user != 2 && type_of_user != 3)
@@ -156,10 +156,7 @@ void Console::print_trenches(int size = 0)
 			cout << trench << "\n";
 			
 		}
-		if ((index + 1) == list.size())
-		{
-			index = 0;
-		}
+		
 	}
 }
 
@@ -234,7 +231,7 @@ void Console::user_buy_trench_ui(int size)
 					list[index].get_quantity(),
 					list[index].get_photograph()
 				);*/
-				cout << list[index];
+				cout << list[index]<<"\n";
 				printf("Press 1 to buy or press 0 to skip or press 2 to exit.\n your choose=");
 				scanf("%d", &user_buy_option);
 				if (user_buy_option == 1)

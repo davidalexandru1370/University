@@ -6,7 +6,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-TrenchService::TrenchService(TrenchRepository* _repository, UserRepository* _user_repository)
+TrenchService::TrenchService(TrenchFileRepository* _repository, UserFileRepository* _user_repository)
 {
 	/// <summary>
 	/// Constructor for trench service

@@ -1,9 +1,26 @@
 #include "TrenchValidator.h"
+#include <exception>
+class TrenchValidatorException : public std::exception {
+private:
+	char* msg;
+
+public:
+	TrenchValidatorException(const char _msg[]) {
+		msg = new char[strlen(_msg)];
+		strcpy(msg, _msg);
+	}
+	const char* what() const throw ()
+	{
+		return msg;
+	}
+};
+
 
 bool TrenchValidator::validate(int size, char colour[], int price, int quantity, char photograph[])
 {
 	if (size <= 0)
 	{
+		throw TrenchValidatorException("Invalid size");
 		return false;
 	}
 	if (strcmp(colour, "") == 0)

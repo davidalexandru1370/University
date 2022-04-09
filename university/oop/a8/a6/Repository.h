@@ -8,8 +8,7 @@ class Repository
 protected:
 	std::vector<Trench> data;
 	virtual int check_if_element_exists(Trench& element) = 0;
-	char* input_file_name;
-	char* output_file_name;
+	char* file_name;
 private:
 	bool check_if_index_belongs(int index);
 public:
@@ -18,7 +17,6 @@ public:
 	void remove_at(int index);
 	void update_at(int index, Trench new_element);
 	std::vector<Trench> get_all();
-	void write_to_file();
-	void read_from_file();
+
 };
 

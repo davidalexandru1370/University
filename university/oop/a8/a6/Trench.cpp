@@ -168,17 +168,36 @@ Trench Trench::operator+(const Trench & trench)
 std::istream& operator>>(std::istream & is, Trench & trench)
 {
 	// TODO: insert return statement here
+	trench.color = new char[15];
+	trench.photograph = new char[15];
 	is >> trench.size >> trench.color >> trench.price >> trench.quantity >> trench.photograph;
+	//is >> trench.size >> trench.price >> trench.quantity ;
 	return is;
 }
 
 std::ostream& operator<<(std::ostream & os, Trench & trench)
 {
-	os << "size = " << trench.get_size() <<
+	/*os << "size = " << trench.get_size() <<
 		" colour = " << trench.get_color() <<
 		" price = " << trench.get_price() <<
 		" quantity = " << trench.get_quantity() <<
-		" photograph " << trench.get_photograph();
+		" photograph = " << trench.get_photograph();*/
+	if (os.rdbuf() == std::cout.rdbuf())
+	{
+		os << "size = " << trench.get_size() <<
+			" colour = " << trench.get_color() <<
+			" price = " << trench.get_price() <<
+			" quantity = " << trench.get_quantity() <<
+			" photograph = " << trench.get_photograph();
+	}
+	else {
+		os << trench.get_size() <<
+			" " << trench.get_color() <<
+			" " << trench.get_price() <<
+			" " << trench.get_quantity() <<
+			" " << trench.get_photograph();
+	}
+
 	// TODO: insert return statement here
 	return os;
 }

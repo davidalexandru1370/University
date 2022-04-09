@@ -13,11 +13,6 @@ bool Repository::check_if_index_belongs(int index)
 
 Repository::Repository()
 {
-	read_from_file();
-	input_file_name = new char[15];
-	output_file_name = new char[15];
-	strcpy(output_file_name, "output.txt");
-	strcpy(input_file_name, "input.txt");
 	//data = Vector<Trench>{ size };
 	/// <summary>
 	/// Constructor for repository class
@@ -39,7 +34,6 @@ void Repository::remove_at(int index)
 	//data->remove_at(index);
 	//data.remove_at(index);
 	data.erase(data.begin() + index);
-	write_to_file();
 }
 
 void Repository::update_at(int index, Trench new_element)
@@ -55,7 +49,6 @@ void Repository::update_at(int index, Trench new_element)
 	}
 	//data->set_element(index, new_element);
 	data[index] = new_element;
-	write_to_file();
 }
 
 std::vector<Trench> Repository::get_all()
@@ -70,17 +63,4 @@ std::vector<Trench> Repository::get_all()
 	//return data;
 }
 
-void Repository::write_to_file()
-{
-	char file_name[] = "input.txt";
-	std::ofstream f(file_name);
-	for (auto& element : data)
-	{
-		f << element<<"\n";
-	}
-}
 
-void Repository::read_from_file()
-{
-	char file_name[] = "output.txt";
-	std::ifstream f(file_

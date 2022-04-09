@@ -4,13 +4,16 @@
 #include "Trench.h"
 #include "UserRepository.h"
 #include "TrenchRepository.h"
+#include "TrenchFileRepository.h"
+#include "UserFileRepository.h"
 class TrenchService
 {
 private:
-	TrenchRepository* repository;
-	UserRepository* user_repository;
+	TrenchFileRepository* repository;
+	UserFileRepository* user_repository;
 public:
-	TrenchService(TrenchRepository* _repository, UserRepository* _user_repository);
+	TrenchService(TrenchFileRepository* _repository, UserFileRepository* _user_repository);
+	//TrenchService(TrenchRepository* _repository, UserRepository* _user_repository);
 	~TrenchService();
 	void add_element(int size, char colour[], int price, int quantity, char photograph[]);
 	void delete_element(int index);

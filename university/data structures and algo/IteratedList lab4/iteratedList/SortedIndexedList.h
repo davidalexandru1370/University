@@ -1,6 +1,6 @@
 #pragma once
 //DO NOT INCLUDE LISTITERATOR
-
+#include "SLLNode.h"
 //DO NOT CHANGE THIS PART
 class ListIterator;
 typedef int TComp;
@@ -12,7 +12,9 @@ private:
 	friend class ListIterator;
 private:
 	//TODO - Representation
-
+	SLLNode* head;
+	int length;
+	Relation relation;
 public:
 	// constructor
 	SortedIndexedList(Relation r);
@@ -44,4 +46,5 @@ public:
 	//destructor
 	~SortedIndexedList();
 
+	
 };

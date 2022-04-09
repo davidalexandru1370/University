@@ -190,6 +190,7 @@ void testAddAndSearch(Relation r) {
             if (p != -1 && v%m == 0){
             	for (int i=0; i<=v/m; i++){
             		try{
+						cout << p << " " << v << "\n";
             			assert(list.remove(p) == v);
             		} catch (exception&) {
 						assert(false);

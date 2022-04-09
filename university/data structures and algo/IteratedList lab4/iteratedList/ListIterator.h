@@ -10,7 +10,7 @@ private:
 	ListIterator(const SortedIndexedList& list);
 
 	//TODO - Representation
-
+	int pos;
 public:
 	void first();
 	void next();

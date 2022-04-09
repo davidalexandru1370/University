@@ -1,0 +1,11 @@
+1 color1 81 1 photograph1
+2 color2 87 2 photograph2
+3 color3 74 3 photograph3
+5 color5 99 5 photograph5
+6 color6 74 6 photograph6
+7 color7 88 7 photograph7
+8 color8 88 8 photograph8
+9 color9 92 9 photograph9
+10 color10 84 10 photograph10
+14 blue 88 15 david
+5 color 5 5 photograph

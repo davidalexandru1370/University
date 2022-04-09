@@ -1,7 +1,10 @@
 #include "TrenchRepository.h"
 #include "Trench.h"
 #include <string>
-TrenchRepository::TrenchRepository() = default;
+TrenchRepository::TrenchRepository() {
+	file_name = new char[15];
+	strcpy(file_name, "input.txt");
+}
 
 TrenchRepository::~TrenchRepository() = default;
 

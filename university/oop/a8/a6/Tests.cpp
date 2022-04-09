@@ -9,23 +9,23 @@
 #include <cassert>
 #include <string>
 
-void Tests::run_all_tests()
-{
-	//test_vector_constructor();
-	//test_vector_push_back();
-	//test_trench();
-	//test_trench_add_repository();
-	//test_delete_repository();
-	//test_update_repository();
-	//test_service_add();
-	//test_trench_getters_and_setters();
-	//test_trench_validator();
-	//test_delete_service();
-	//test_update_service();
-	//test_search_trench();
-	//test_add_element_in_shopping_basket();
-	//test_utils();
-	//test_vector_remove();
+void Tests::run_all_tests() {}
+/*{
+	test_vector_constructor();
+	test_vector_push_back();
+	test_trench();
+	test_trench_add_repository();
+	test_delete_repository();
+	test_update_repository();
+	test_service_add();
+	test_trench_getters_and_setters();
+	test_trench_validator();
+	test_delete_service();
+	test_update_service();
+	test_search_trench();
+	test_add_element_in_shopping_basket();
+	test_utils();
+	test_vector_remove();
 }
 
 void Tests::test_vector_constructor()
@@ -366,7 +366,7 @@ void Tests::test_utils()
 
 	}
 }
-
+*/
 
 
 
