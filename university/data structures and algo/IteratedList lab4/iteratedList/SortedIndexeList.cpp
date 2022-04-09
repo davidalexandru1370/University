@@ -41,37 +41,45 @@ TComp SortedIndexedList::getElement(int i) const {
 TComp SortedIndexedList::remove(int i) {
 	//TODO - Implementation
 	//return NULL_TCOMP;
-	if (i >= length)
+	if (i >= length || i < 0)
 	{
 		throw exception();
 	}
-	
+	//if linked list is empty ?
+
 	int index = 0;
 	SLLNode* previous = head;
 	while (index < (i - 1))
 	{
 		previous = previous->get_next();
+		index++;
 	}
 	this->length--;
 	TComp saved;
 	if (previous->get_next() == nullptr)
 	{//last element
-		previous->set_next(nullptr);
-		saved = previous->get_value(); // ?
-	}//first element
-	if (previous==head)
-	{
 		saved = previous->get_value();
-		previous->set_next(previous->get_next());
+		previous->set_next(nullptr);
+		 // ?
+	}//first element
+	if (previous == head)
+	{
+		if (i == 0)
+		{
+			saved = previous->get_value();
+			previous->set_next(previous->get_next());
+		}
+		else 
+		{
+			saved = previous->get_next()->get_value();
+			previous->set_next(previous->get_next()->get_next());
+		}
 	}//between elements
 	else {
 		saved = previous->get_next()->get_value();
-		previous->get_next()->set_next(nullptr);
 		previous->set_next(previous->get_next()->get_next());
 	}
 	return saved;
-
-	
 }
 
 int SortedIndexedList::search(TComp e) const {
@@ -96,7 +104,7 @@ void SortedIndexedList::add(TComp e) {
 	SLLNode* prev = nullptr;
 	this->length++;
 
-	if (position!=nullptr && relation(position->get_value(),e)==false)
+	if (position != nullptr && relation(position->get_value(), e) == false)
 	{
 		SLLNode* new_node = new SLLNode(e, position);
 		head = new_node;
@@ -116,7 +124,7 @@ void SortedIndexedList::add(TComp e) {
 			SLLNode* new_node = new SLLNode(e, position);
 			head = new_node;
 		}
-		else 
+		else
 		{   //final of the list
 			SLLNode* new_node = new SLLNode(e, nullptr);
 			prev->set_next(new_node);
@@ -135,4 +143,15 @@ ListIterator SortedIndexedList::iterator() {
 //destructor
 SortedIndexedList::~SortedIndexedList() {
 	//TODO - Implementation
+}
+
+void SortedIndexedList::print_list()
+{
+	SLLNode* node = head;
+	while (node != nullptr)
+	{
+		cout << node->get_value() << " ";
+		node = node->get_next();
+	}
+	cout << "\n";
 }

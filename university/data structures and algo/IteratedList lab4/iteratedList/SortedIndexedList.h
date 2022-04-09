@@ -46,5 +46,5 @@ public:
 	//destructor
 	~SortedIndexedList();
 
-	
+	void print_list();
 };
