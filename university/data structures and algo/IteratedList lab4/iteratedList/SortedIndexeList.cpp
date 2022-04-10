@@ -60,24 +60,34 @@ TComp SortedIndexedList::remove(int i) {
 	{//last element
 		saved = previous->get_value();
 		previous->set_next(nullptr);
-		 // ?
+		// ?
 	}//first element
 	if (previous == head)
 	{
 		if (i == 0)
 		{
+			SLLNode* remember = head->get_next();
 			saved = previous->get_value();
-			previous->set_next(previous->get_next());
+			delete head;
+			head = remember;
 		}
-		else 
+		else
 		{
+			SLLNode* remember = previous->get_next();
 			saved = previous->get_next()->get_value();
 			previous->set_next(previous->get_next()->get_next());
+			//deallocate part
+			remember->set_next(nullptr);
+			delete remember;
 		}
 	}//between elements
 	else {
+		SLLNode* remember = previous->get_next();
 		saved = previous->get_next()->get_value();
 		previous->set_next(previous->get_next()->get_next());
+		//deallocate part
+		remember->set_next(nullptr);
+		delete remember;
 	}
 	return saved;
 }
@@ -103,7 +113,7 @@ void SortedIndexedList::add(TComp e) {
 	SLLNode* position = head;
 	SLLNode* prev = nullptr;
 	this->length++;
-
+	//beginnig of the list and the list is not empty
 	if (position != nullptr && relation(position->get_value(), e) == false)
 	{
 		SLLNode* new_node = new SLLNode(e, position);
@@ -118,7 +128,7 @@ void SortedIndexedList::add(TComp e) {
 	}
 	if (position == nullptr)
 	{
-		//beginning of the list
+		//beginning of the list and list is empty
 		if (prev == nullptr)
 		{
 			SLLNode* new_node = new SLLNode(e, position);
@@ -143,15 +153,12 @@ ListIterator SortedIndexedList::iterator() {
 //destructor
 SortedIndexedList::~SortedIndexedList() {
 	//TODO - Implementation
+	SLLNode* node;
+	while (head != nullptr)
+	{
+		node = head;
+		head = head->get_next();
+		delete node;
+	}
 }
 
-void SortedIndexedList::print_list()
-{
-	SLLNode* node = head;
-	while (node != nullptr)
-	{
-		cout << node->get_value() << " ";
-		node = node->get_next();
-	}
-	cout << "\n";
-}

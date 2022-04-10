@@ -8,7 +8,7 @@ SLLNode::SLLNode(TComp value, SLLNode* next)
 
 SLLNode::~SLLNode()
 {
-
+	//delete this;
 }
 
 TComp SLLNode::get_value()  const

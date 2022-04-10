@@ -9,13 +9,13 @@ ListIterator::ListIterator(const SortedIndexedList& list) : list(list) {
 	//TODO - Implementation
 }
 
-void ListIterator::first(){
+void ListIterator::first() {
 	pos = 0;
 	//TODO - Implementation
 }
 
-void ListIterator::next(){
-	if (valid()==false)
+void ListIterator::next() {
+	if (valid() == false)
 	{
 		throw exception();
 	}
@@ -23,15 +23,15 @@ void ListIterator::next(){
 	//TODO - Implementation
 }
 
-bool ListIterator::valid() const{
+bool ListIterator::valid() const {
 	//TODO - Implementation
 	return pos >= list.length ? false : true;
 }
 
-TComp ListIterator::getCurrent() const{
+TComp ListIterator::getCurrent() const {
 	//TODO - Implementation
 	//return NULL_TCOMP;
-	if (pos>=list.length)
+	if (pos >= list.length)
 	{
 		throw std::exception();
 	}
