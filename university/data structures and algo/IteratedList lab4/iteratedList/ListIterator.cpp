@@ -3,17 +3,19 @@
 #include <iostream>
 
 using namespace std;
-
+//Theta(1)
 ListIterator::ListIterator(const SortedIndexedList& list) : list(list) {
 	pos = 0;
 	//TODO - Implementation
 }
 
+//Theta(1)
 void ListIterator::first() {
 	pos = 0;
 	//TODO - Implementation
 }
 
+//Theta(1)
 void ListIterator::next() {
 	if (valid() == false)
 	{
@@ -23,11 +25,13 @@ void ListIterator::next() {
 	//TODO - Implementation
 }
 
+//Theta(1)
 bool ListIterator::valid() const {
 	//TODO - Implementation
 	return pos >= list.length ? false : true;
 }
 
+//Theta(1)
 TComp ListIterator::getCurrent() const {
 	//TODO - Implementation
 	//return NULL_TCOMP;

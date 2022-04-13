@@ -14,7 +14,8 @@ using namespace std;
 bool asc(TComp c1, TComp c2) {
 	if (c1 <= c2) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
@@ -23,7 +24,8 @@ bool asc(TComp c1, TComp c2) {
 bool desc(TComp c1, TComp c2) {
 	if (c1 >= c2) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
@@ -62,13 +64,15 @@ void testCreate() {
 		try {
 			assert(list.getElement(i));
 			assert(false);
-		} catch (exception&) {
+		}
+		catch (exception&) {
 			assert(true);
 		}
 		try {
 			assert(list.remove(i));
 			assert(false);
-		} catch (exception&) {
+		}
+		catch (exception&) {
 			assert(true);
 		}
 		try {
@@ -153,16 +157,17 @@ void testAddAndSearch(Relation r) {
 	assert(!list.isEmpty());
 	assert(list.size() == n);
 
-    //we can't find values outside the interval or on invalid positions
+	//we can't find values outside the interval or on invalid positions
 	int d = 30;
 	for (int i = 1; i <= d; i++) {
 		assert(list.search(vMin - i) == -1);
 		assert(list.search(vMax + i) == -1);
-		try{
-			list.getElement(n-1+i);
+		try {
+			list.getElement(n - 1 + i);
 			list.getElement(-d);
 			assert(false);
-		} catch (exception&) {
+		}
+		catch (exception&) {
 			assert(true);
 		}
 	}
@@ -182,22 +187,23 @@ void testAddAndSearch(Relation r) {
 	testIteratorSteps(list, r);
 
 	//check if added values can be found
-		for (int v = vMin; v <= vMax; v++) {
-			int p = list.search(v);
-			//we can't find values which are a multiple of s
-			assert((p != -1) == (v % s != 0));
-			//values which are a multiple of m can be found exactly v/m+1 times
-            if (p != -1 && v%m == 0){
-            	for (int i=0; i<=v/m; i++){
-            		try{
-						assert(list.remove(p) == v);
-					} catch (exception&) {
-						assert(false);
-					}
-            	}
-            	assert(list.search(v) == -1);
-            }
+	for (int v = vMin; v <= vMax; v++) {
+		int p = list.search(v);
+		//we can't find values which are a multiple of s
+		assert((p != -1) == (v % s != 0));
+		//values which are a multiple of m can be found exactly v/m+1 times
+		if (p != -1 && v % m == 0) {
+			for (int i = 0; i <= v / m; i++) {
+				try {
+					assert(list.remove(p) == v);
+				}
+				catch (exception&) {
+					assert(false);
+				}
+			}
+			assert(list.search(v) == -1);
 		}
+	}
 }
 
 void testDeleteSearch(Relation r) {
@@ -212,7 +218,8 @@ void testDeleteSearch(Relation r) {
 		try {
 			list.remove(list.search(vMax + i));
 			assert(false);
-		} catch (exception&) {
+		}
+		catch (exception&) {
 			assert(true);
 		}
 	}
@@ -238,7 +245,8 @@ void testDeleteSearch(Relation r) {
 		it2.first();
 		assert(it2.valid());
 		assert(it1.getCurrent() == newFirst && it2.getCurrent() == newFirst);
-	} catch (exception&) {
+	}
+	catch (exception&) {
 		assert(false);
 	}
 
@@ -249,11 +257,11 @@ void testDeleteSearch(Relation r) {
 		testIteratorSteps(list, r);
 		int v = vs[i];
 		try {
-			int it1  = list.search(v);
+			int it1 = list.search(v);
 			TComp deletedCurrent = list.remove(it1);
 			assert(deletedCurrent != deleted);
 			assert(deletedCurrent == v);
-			assert(list.search(v)  == -1);
+			assert(list.search(v) == -1);
 
 			if (!list.isEmpty()) {
 				ListIterator it2 = list.iterator();
@@ -269,7 +277,8 @@ void testDeleteSearch(Relation r) {
 				}
 			}
 
-		} catch (exception&) {
+		}
+		catch (exception&) {
 			assert(v == deleted);
 		}
 	}
@@ -289,67 +298,87 @@ void testAddAndSearch() {
 }
 
 
-void testQuantity(){
+void testQuantity() {
 	cout << "Test quantity" << endl;
 	SortedIndexedList list = SortedIndexedList(asc);
 
 	int vMin = 3000;
 	int vMax = 6000;
-	vector<int> values  = random(vMin, vMax);
+	vector<int> values = random(vMin, vMax);
 	int n = values.size();
-    for (int i = 0; i < n; i++){
-    	list.add(values[i]);
-    }
+	for (int i = 0; i < n; i++) {
+		list.add(values[i]);
+	}
 
-    assert(list.size() == vMax - vMin + 1);
-    for (int v = vMin; v <= vMax; v++){
-      	assert(list.search(v)>= 0 && list.search(v) < list.size());
-      	assert(list.getElement(list.search(v)) == v);
-    }
+	assert(list.size() == vMax - vMin + 1);
+	for (int v = vMin; v <= vMax; v++) {
+		assert(list.search(v) >= 0 && list.search(v) < list.size());
+		assert(list.getElement(list.search(v)) == v);
+	}
 
-    ListIterator it  = list.iterator();
-    it.first();
-    assert(it.valid());
+	ListIterator it = list.iterator();
+	it.first();
+	assert(it.valid());
 	TComp firstElement = it.getCurrent();
-    it.first();
-    assert(it.valid());
-    assert(it.getCurrent() == firstElement);
-    for (int i = 0; i < list.size(); i++) {
-    	it.next();
-    }
+	it.first();
+	assert(it.valid());
+	assert(it.getCurrent() == firstElement);
+	for (int i = 0; i < list.size(); i++) {
+		it.next();
+	}
 
-    assert(!it.valid());
-    it.first();
-    while (it.valid()){
-		TComp v  = it.getCurrent();
-        assert(vMin <= v && v<=vMax);
-        it.next();
-    }
-    assert(!it.valid());
+	assert(!it.valid());
+	it.first();
+	while (it.valid()) {
+		TComp v = it.getCurrent();
+		assert(vMin <= v && v <= vMax);
+		it.next();
+	}
+	assert(!it.valid());
 
 
-    int d = 100;
-    //consider the interval [vMin-d, vMax+d]
-    for (int v = vMin-d; v <= vMax+d; v++){
-    	//check that only values from the interval [vMin, vMax] are included in the list
-    	 assert((list.search(v) != -1) == (vMin <= v && v <= vMax));
-    	 try{
-    		 assert(list.remove(list.search(v)));
-    		 assert(vMin <= v && v <= vMax);
-    	 } catch (exception&) {
-			 assert(vMin > v || v > vMax);
+	int d = 100;
+	//consider the interval [vMin-d, vMax+d]
+	for (int v = vMin - d; v <= vMax + d; v++) {
+		//check that only values from the interval [vMin, vMax] are included in the list
+		assert((list.search(v) != -1) == (vMin <= v && v <= vMax));
+		try {
+			assert(list.remove(list.search(v)));
+			assert(vMin <= v && v <= vMax);
 		}
-    }
-    assert(list.size() == 0);
-    assert(list.isEmpty());
+		catch (exception&) {
+			assert(vMin > v || v > vMax);
+		}
+	}
+	assert(list.size() == 0);
+	assert(list.isEmpty());
+}
+
+void test_last_index_of() {
+	SortedIndexedList list = SortedIndexedList(asc);
+	list.add(10);
+	list.add(8);
+	list.add(8);
+	list.add(5);
+	list.add(4);
+	list.add(15);
+	list.add(20);
+	//4 5 8 8 10 15 20
+	assert(list.size() == 7);
+	assert(list.lastIndexOf(8) == 3);
+	assert(list.lastIndexOf(25) == -1);
+	assert(list.lastIndexOf(3) == -1);
+	assert(list.lastIndexOf(20) == 6);
+	assert(list.lastIndexOf(15) == 5);
+	assert(list.lastIndexOf(10) == 4);
+	assert(list.lastIndexOf(5) == 1);
+	assert(list.lastIndexOf(4) == 0);
 }
 
 void testAllExtended() {
 	testCreate();
 	testAddAndSearch();
 	testDeleteSearch();
-    testQuantity();
+	testQuantity();
+	test_last_index_of();
 }
-
-
-

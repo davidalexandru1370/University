@@ -12,16 +12,22 @@ SortedIndexedList::SortedIndexedList(Relation r) {
 	//head = new SLLNode();
 }
 
+//Theta(1)
 int SortedIndexedList::size() const {
 	//TODO - Implementation
 	return length;
 }
 
+//Theta(1)
 bool SortedIndexedList::isEmpty() const {
 	//TODO - Implementation
 	return length == 0;
 }
 
+//Theta(n) - worst case 
+//Theta(n) - average case
+//Theta(1) - best case
+//O(n) - total case
 TComp SortedIndexedList::getElement(int i) const {
 	//TODO - Implementation
 	if (i >= length)
@@ -38,6 +44,10 @@ TComp SortedIndexedList::getElement(int i) const {
 	return result->get_value();
 }
 
+//Theta(n) - worst case
+//Theta(n) - average case
+//Theta(1) - best case
+//Total case - O(n)
 TComp SortedIndexedList::remove(int i) {
 	//TODO - Implementation
 	//return NULL_TCOMP;
@@ -45,7 +55,7 @@ TComp SortedIndexedList::remove(int i) {
 	{
 		throw exception();
 	}
-	//if linked list is empty ?
+
 
 	int index = 0;
 	SLLNode* previous = head;
@@ -92,6 +102,10 @@ TComp SortedIndexedList::remove(int i) {
 	return saved;
 }
 
+//Theta(n) - worst case
+//Theta(n) - average case
+//Theta(1) - best case
+//Total case - O(n)
 int SortedIndexedList::search(TComp e) const {
 	//TODO - Implementation
 	int index = 0;
@@ -108,6 +122,10 @@ int SortedIndexedList::search(TComp e) const {
 	return -1;
 }
 
+//Theta(n) - worst case
+//Theta(n) - average case
+//Theta(1) - best case
+//Total case - O(n)
 void SortedIndexedList::add(TComp e) {
 	//TODO - Implementation
 	SLLNode* position = head;
@@ -160,5 +178,45 @@ SortedIndexedList::~SortedIndexedList() {
 		head = head->get_next();
 		delete node;
 	}
+}
+
+//Theta(n) - worst case
+//Theta(n) - average case
+//Theta(1) - best case
+//Total case - O(n)
+int SortedIndexedList::lastIndexOf(TComp element) const
+{
+	int index = 0;
+	SLLNode* current = head;
+	if (current != nullptr && element < current->get_value())
+	{
+		return -1;
+	}
+
+	while (current != nullptr && current->get_value() < element)
+	{
+		current = current->get_next();
+		index++;
+	}
+
+	if (current != nullptr)
+	{
+		if (current->get_value() != element)
+		{
+			return -1;
+		}
+		else {
+			while (current != nullptr && current->get_value() == element)
+			{
+				current = current->get_next();
+				index++;
+			}
+		}
+	}
+	else {
+		return -1;
+	}
+
+	return index-1;
 }
 
