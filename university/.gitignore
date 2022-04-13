@@ -3,3 +3,17 @@
 **.vcxproj
 **.user
 **.filters
+*.opendb
+*.sln
+*.vcxproj
+*.user
+*.filters
+.opendb
+.sln
+.vcxproj
+.user
+.filters
+.graph1k.txt
+.graph10k.txt
+.graph100k.txt
+.graph1m.txt

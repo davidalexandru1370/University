@@ -5,6 +5,7 @@
 class ListIterator;
 typedef int TComp;
 typedef bool (*Relation)(TComp, TComp);
+typedef bool(*Condition)(TComp);
 #define NULL_TCOMP -11111
 
 class SortedIndexedList {
@@ -46,7 +47,6 @@ public:
 	//destructor
 	~SortedIndexedList();
 
-	//returns the last index of a given element
-	//if the element is not in the list it returns an invalid TPosition
-	int lastIndexOf(TComp element) const;
+	void filter(Condition cond);
+	
 };

@@ -354,25 +354,28 @@ void testQuantity() {
 	assert(list.isEmpty());
 }
 
-void test_last_index_of() {
+bool comparision(TComp value) {
+	int cmp_value = 8;
+	return value >= cmp_value;
+}
+
+void test_filter() {
 	SortedIndexedList list = SortedIndexedList(asc);
 	list.add(10);
+	list.add(9);
 	list.add(8);
 	list.add(8);
+	list.add(7);
+	list.add(7);
+	list.add(7);
 	list.add(5);
-	list.add(4);
-	list.add(15);
-	list.add(20);
-	//4 5 8 8 10 15 20
-	assert(list.size() == 7);
-	assert(list.lastIndexOf(8) == 3);
-	assert(list.lastIndexOf(25) == -1);
-	assert(list.lastIndexOf(3) == -1);
-	assert(list.lastIndexOf(20) == 6);
-	assert(list.lastIndexOf(15) == 5);
-	assert(list.lastIndexOf(10) == 4);
-	assert(list.lastIndexOf(5) == 1);
-	assert(list.lastIndexOf(4) == 0);
+	list.filter(comparision);
+	// 5 7 7 7 8 8 9 10
+	assert(list.size() == 4);
+	assert(list.getElement(0) == 5);
+	assert(list.getElement(1) == 7);
+	assert(list.getElement(2) == 7);
+
 }
 
 void testAllExtended() {
@@ -380,5 +383,5 @@ void testAllExtended() {
 	testAddAndSearch();
 	testDeleteSearch();
 	testQuantity();
-	test_last_index_of();
+	test_filter();
 }

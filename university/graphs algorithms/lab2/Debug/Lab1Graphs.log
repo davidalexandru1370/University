@@ -1,0 +1,3 @@
+﻿  Console.cpp
+C:\Users\David\Desktop\university\university\graphs algorithms\lab2\Console.cpp(392,7): warning C4101: 'text_file': unreferenced local variable
+  Lab1Graphs.vcxproj -> C:\Users\David\Desktop\university\university\graphs algorithms\lab2\Debug\Lab1Graphs.exe

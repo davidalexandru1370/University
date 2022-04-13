@@ -31,7 +31,7 @@ bool ListIterator::valid() const {
 	return pos >= list.length ? false : true;
 }
 
-//Theta(1)
+//Theta(i)
 TComp ListIterator::getCurrent() const {
 	//TODO - Implementation
 	//return NULL_TCOMP;

@@ -24,10 +24,10 @@ bool SortedIndexedList::isEmpty() const {
 	return length == 0;
 }
 
-//Theta(n) - worst case 
-//Theta(n) - average case
-//Theta(1) - best case
-//O(n) - total case
+//Theta(i) - worst case 
+//Theta(i) - average case
+//Theta(i) - best case
+//O(i) - total case
 TComp SortedIndexedList::getElement(int i) const {
 	//TODO - Implementation
 	if (i >= length)
@@ -44,10 +44,10 @@ TComp SortedIndexedList::getElement(int i) const {
 	return result->get_value();
 }
 
-//Theta(n) - worst case
-//Theta(n) - average case
-//Theta(1) - best case
-//Total case - O(n)
+//Theta(i) - worst case
+//Theta(i) - average case
+//Theta(i) - best case
+//Total case - Theta(i)
 TComp SortedIndexedList::remove(int i) {
 	//TODO - Implementation
 	//return NULL_TCOMP;
@@ -55,7 +55,6 @@ TComp SortedIndexedList::remove(int i) {
 	{
 		throw exception();
 	}
-
 
 	int index = 0;
 	SLLNode* previous = head;
@@ -180,43 +179,36 @@ SortedIndexedList::~SortedIndexedList() {
 	}
 }
 
-//Theta(n) - worst case
-//Theta(n) - average case
-//Theta(1) - best case
-//Total case - O(n)
-int SortedIndexedList::lastIndexOf(TComp element) const
+//keeps in the SortedList only the elements that respect the given condition
+//Worst case - Theta(i^2)
+//Average case - Theta(i^2)
+//Best case - Theta(1)
+//Total case - O(n^2)
+void SortedIndexedList::filter(Condition cond)
 {
-	int index = 0;
 	SLLNode* current = head;
-	if (current != nullptr && element < current->get_value())
-	{
-		return -1;
-	}
+	SLLNode* prev = nullptr;
+	int index = 0;
 
-	while (current != nullptr && current->get_value() < element)
+	while (current != nullptr)
 	{
-		current = current->get_next();
-		index++;
-	}
-
-	if (current != nullptr)
-	{
-		if (current->get_value() != element)
+		if (current != nullptr)
 		{
-			return -1;
+			prev = current;
+			current = current->get_next();
 		}
+
+		if (current != nullptr && cond(current->get_value()) == true)
+		{
+			this->remove(index);
+		}
+
 		else {
-			while (current != nullptr && current->get_value() == element)
-			{
-				current = current->get_next();
-				index++;
-			}
+			index++;
 		}
-	}
-	else {
-		return -1;
 	}
 
-	return index-1;
 }
+
+
 
