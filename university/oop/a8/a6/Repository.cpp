@@ -57,10 +57,17 @@ std::vector<Trench> Repository::get_all()
 	/// Retrieve all the data in the repository
 	/// </summary>
 	/// <returns>Vector with all data</returns>
-	//Vector* all = new Vector(*data);
-	//Vector<Trench> copy_data = data;
+
 	return data;
-	//return data;
+	
 }
 
+RepositoryException::RepositoryException(std::string error)
+{
+	message = error;
+}
 
+const char* RepositoryException::what() const noexcept
+{
+	return message.c_str();
+}

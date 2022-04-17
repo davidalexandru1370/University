@@ -1,2 +1,14 @@
-﻿  Main.cpp
+﻿  Console.cpp
+  Main.cpp
+  Repository.cpp
+C:\Users\David\Desktop\university\university\oop\a8\a6\Repository.cpp(11,28): warning C4018: '>=': signed/unsigned mismatch
+  Tests.cpp
+  TrenchFileRepository.cpp
+  TrenchRepository.cpp
+  TrenchService.cpp
+C:\Users\David\Desktop\university\university\oop\a8\a6\TrenchService.cpp(56,24): warning C4018: '>=': signed/unsigned mismatch
+  TrenchValidator.cpp
+  UserFileRepository.cpp
+  UserRepository.cpp
+  Generating Code...
   a6.vcxproj -> C:\Users\David\Desktop\university\university\oop\a8\a6\Debug\a6.exe

@@ -3,7 +3,7 @@
 #include "Trench.h"
 #include <string>
 
-class UserRepository : public  Repository
+class UserRepository : public Repository
 {
 private:
 	int check_if_element_exists(Trench &element) override;

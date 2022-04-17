@@ -1,6 +1,16 @@
 #pragma once
 #include <string>
 #include "Trench.h"
+class TrenchValidatorException : public std::exception {
+private:
+	std::string message;
+
+public:
+	TrenchValidatorException(std::string error);
+	const char* what() const noexcept override;
+	
+
+};
 class TrenchValidator
 {
 public:

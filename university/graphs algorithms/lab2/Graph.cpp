@@ -1,5 +1,7 @@
 #include "Graph.h"
 #include <queue>
+#include <string>
+#include <sstream>
 Graph::Graph()
 {
 	number_of_nodes = 0;
@@ -190,53 +192,75 @@ std::pair<std::vector<int>::iterator, std::vector<int>::iterator> Graph::get_ite
 	return std::make_pair(edges_in[node].begin(), edges_in[node].end());
 }
 
+bool Graph::check_for_same_extension(char* name1, const char* extension)
+{
+	if (strlen(name1) < strlen(extension))
+	{
+		return false;
+	}
+	int index = 1;
+	for (int i = strlen(extension) - 1; i >= 0; i--)
+	{
+		if (extension[i] != name1[strlen(name1) - index])
+		{
+			return false;
+		}
+		index++;
+		//std::cout << name1[strlen(name1) - 1 - i];
+		//std::cout << extension[i];
+	}
+	return true;
+}
+
 void Graph::read_graph_from_file(char file_name[])
 {
 	std::ifstream file(file_name);
-	file >> number_of_nodes >> number_of_edges;
-	for (size_t index = 0; index < number_of_nodes; index++)
+	std::vector<std::string>lines;
+	std::string line;
+
+	if (check_for_same_extension(file_name, ".other"))
 	{
-		edges_in[index] = std::vector<int>();
-		edges_out[index] = std::vector<int>();
-		nodes.push_back(index);
+		while (std::getline(file, line))
+		{
+			lines.push_back(line);
+		}
+		std::istringstream ss(lines[0]);
+		ss >> number_of_nodes >> number_of_edges;
+		ss = std::istringstream(lines[1]);
+		for (size_t i = 0; i < number_of_nodes; i++)
+		{
+			std::string node;
+			ss >> node;
+			nodes.push_back(atoi(node.c_str()));
+
+		}
+		for (size_t index = 0; index < number_of_edges; index++)
+		{
+			std::string node1, node2, cost;
+			ss = std::istringstream(lines[index + 2]);
+			ss >> node1 >> node2 >> cost;
+			edges_out[atoi(node1.c_str())].push_back(atoi(node2.c_str()));
+			edges_in[atoi(node2.c_str())].push_back(atoi(node1.c_str()));
+			costs[std::make_pair(atoi(node1.c_str()), atoi(node2.c_str()))] = atoi(cost.c_str());
+		}
+
 	}
-	for (size_t index = 0; index < number_of_edges; index++)
-	{
-		int node1, node2, cost = 0;
-		file >> node1 >> node2 >> cost;
-		/*edges_out[node1].push_back(node2);
-		costs[std::make_pair(node1, node2)] = cost;*/
-		//edges_in[node2].push_back(node1);
-		//edges_out[node1].push_back(node2);
-		//in order to do not mark them as isolated nodes
-		if (node2 == -1)
+	else if (check_for_same_extension(file_name, ".txt") == true) {
+		file >> number_of_nodes >> number_of_edges;
+		for (size_t index = 0; index < number_of_nodes; index++)
 		{
-			edges_in[node1] = std::vector<int>();
-			edges_out[node1] = std::vector<int>();
+			edges_in[index] = std::vector<int>();
+			edges_out[index] = std::vector<int>();
+			nodes.push_back(index);
+		}
+
+		for (size_t index = 0; index < number_of_edges; index++)
+		{
+			int node1, node2, cost = 0;
+			file >> node1 >> node2 >> cost;
 			edges_out[node1].push_back(node2);
-			edges_in[node1].push_back(node2);
-			costs[std::make_pair(node1, node2)] = 0;
-			//nodes.push_back(node1);
-			continue;
-		}
-		//std::cout << node1 << " " << node2 << "\n";
-		if (check_if_node_exists(node1) == false)
-		{
-			edges_in[node1] = std::vector<int>();
-			edges_out[node1] = std::vector<int>();
-			nodes.push_back(node1);
-		}
-		if (check_if_node_exists(node2) == false)
-		{
-			edges_in[node2] = std::vector<int>();
-			edges_out[node2] = std::vector<int>();
-			nodes.push_back(node2);
-		}
-		costs[std::make_pair(node1, node2)] = cost;
-		if (is_edge(node1, node2) == false)
-		{
-			add_edge(node1, node2, cost);
-			number_of_edges--;
+			edges_in[node2].push_back(node1);
+			costs[std::make_pair(node1, node2)] = cost;
 		}
 	}
 }
@@ -310,15 +334,16 @@ std::vector<int> Graph::bfs(int start_node, int end_node)
 	{
 		throw std::exception("One of the nodes does not exist!");
 	}
-
+	std::vector<int>ans;
+	ans.push_back(end_node);
 	std::queue<int>next_nodes;
 	std::map<int, int>visited;
 	std::map<int, int>distance;
-	std::map<int, std::vector<int>> path;
-	//visited.push_back(start_node);
+	//std::map<int, std::vector<int>> path;
+	std::map<int, int>path;
 	visited[start_node] = 1;
 	distance[start_node] = 0;
-	path[start_node].push_back(start_node);
+	//path[start_node].push_back(start_node);
 	next_nodes.push(start_node);
 	while (next_nodes.empty() == false)
 	{
@@ -333,12 +358,18 @@ std::vector<int> Graph::bfs(int start_node, int end_node)
 				next_nodes.push(*it);
 				visited[*it] = 1;
 				distance[*it] = distance[node] + 1;
-				path[*it] = path[node];
-				path[*it].push_back(*it);
+				path[*it] = node;
 				if (*it == end_node)
 				{
-					path[*it].push_back(distance[*it]);
-					return path[*it];
+					int vertex = path[*it];
+					while (vertex != start_node)
+					{
+						ans.push_back(vertex);
+						vertex = path[vertex];
+					}
+					ans.push_back(start_node);
+					return ans;
+
 				}
 			}
 		}

@@ -8,16 +8,21 @@ TrenchRepository::TrenchRepository() {
 
 TrenchRepository::~TrenchRepository() = default;
 
-int TrenchRepository::check_if_element_exists(Trench& element)
+int TrenchRepository::check_if_element_exists(Trench & element)
 {
-	for (size_t index = 0; index < data.size(); index++)
+	/*for (size_t index = 0; index < data.size(); index++)
 	{
 		if (element == data[index])
 		{
 			return index;
 		}
+	}*/
+	auto index = std::find_if(data.begin(), data.end(), [element](Trench& trench)  {return trench == element; });
+	if (data.end() != index)
+	{
+		throw RepositoryException("Element already exists\n");
 	}
-	return -1;
+	return 1;
 }
 
 void TrenchRepository::add_element(Trench element)
@@ -31,16 +36,8 @@ void TrenchRepository::add_element(Trench element)
 		data->set_element(index, a);
 }
 	else {
-
 	}
 	*/
-	int index = check_if_element_exists(element);
-	if (index != -1)
-	{
-		data[index] = data[index] + element;
-	}
-	else
-	{
-		data.push_back(element);
-	}
+	check_if_element_exists(element);
+	data.push_back(element);
 }

@@ -72,7 +72,7 @@ void Console::run_console()
 		}
 		else if (choice == 8)
 		{
-			print_graph_to_file("output.txt");
+			print_graph_to_file("output.other");
 		}
 		else if (choice == 9) {
 			print_all_graph();
@@ -278,14 +278,14 @@ void Console::print_const_between_two_nodes()
 
 void Console::read_graph_from_file()
 {
-	char file_name[] = "graph100k.txt";
+	char file_name[] = "input2.txt";
 	//auto start = std::chrono::high_resolution_clock::now();
 	graph.read_graph_from_file(file_name);
 	//auto stop = std::chrono::high_resolution_clock::now();
 	//printf("Total time = %d\n", std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count());
 }
 
-void Console::print_graph_to_file(std::string file_name = "output.txt")
+void Console::print_graph_to_file(std::string file_name = "output.other")
 {
 	std::ofstream file(file_name);
 	std::pair<std::vector<int>::iterator, std::vector<int>::iterator> nodes = graph.get_iterator_for_nodes();
@@ -294,32 +294,32 @@ void Console::print_graph_to_file(std::string file_name = "output.txt")
 		file << "The graph cannot be build!";
 	}
 	else {
+
 		file << graph.get_number_of_nodes() << " " << graph.get_the_number_of_edges() << "\n";
 		for (std::vector<int>::iterator index = nodes.first; index < nodes.second; index++)
 		{
-			try
+			file << *index << " ";
+		}
+		file << "\n";
+		for (std::vector<int>::iterator index = nodes.first; index < nodes.second; index++)
+		{
+			std::pair<std::vector<int>::iterator, std::vector<int>::iterator> edges = graph.get_iterator_for_outbounds_of_a_node(*index);
+			for (std::vector<int>::iterator edge = edges.first; edge < edges.second; edge++)
 			{
-				std::pair<std::vector<int>::iterator, std::vector<int>::iterator> edges = graph.get_iterator_for_outbounds_of_a_node(*index);
-
-				for (std::vector<int>::iterator edge = edges.first; edge < edges.second; edge++)
+				if (*edge == -1)
 				{
-					if (*edge == -1)
-					{
-						file << *index << " " << *edge << " " << 0 << "\n";
-						break;
-					}
-					file << *index << " " << *edge << " " << graph.get_the_cost_between_two_nodes(*index, *edge) << "\n";
+					file << *index << " " << *edge << " " << 0 << "\n";
+					break;
 				}
-
-			}
-			catch (const std::exception&)
-			{
-				file << *index << " -1 0" << "\n";
+				file << *index << " " << *edge << " " << graph.get_the_cost_between_two_nodes(*index, *edge) << "\n";
 			}
 
 		}
 	}
+
 }
+
+
 
 void Console::remove_a_node()
 {
@@ -372,6 +372,8 @@ void Console::print_number_of_edges()
 {
 	std::cout << "The number of edges = " << graph.get_the_number_of_edges() << "\n";
 }
+
+
 
 void Console::print_all_graph()
 {
@@ -430,13 +432,13 @@ void Console::print_bfs()
 		std::cout << "There is no path between those two nodes!\n";
 	}
 	else {
-		std::cout << "Distance = " << res[res.size() - 1] << "\n";
-		std::cout << "Path = \n";
+		std::cout << "Distance = " << res.size() - 1 << "\n";
+		std::cout << "Path = ";
 		/*for (int i = res.size() - 2; i >= 0; i--)
 		{
 			std::cout << res[i] << " ";
 		}*/
-		for (size_t i = 0; i < res.size() - 1; i++)
+		for (size_t i = 0; i < res.size(); i++)
 		{
 			std::cout << res[i] << " ";
 		}

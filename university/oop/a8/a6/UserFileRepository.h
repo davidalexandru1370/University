@@ -1,7 +1,7 @@
 #pragma once
 #include "Repository.h"
 #include "UserRepository.h"
-class UserFileRepository: public UserRepository
+class UserFileRepository: public UserRepository	
 {
 private:
 	char* file_name;

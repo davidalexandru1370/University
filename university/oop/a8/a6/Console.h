@@ -10,6 +10,7 @@ public:
 	TrenchService* service;
 	void run_console();
 private:
+
 	void print_administrator_menu();
 	void print_user_menu();
 	int type_of_user;

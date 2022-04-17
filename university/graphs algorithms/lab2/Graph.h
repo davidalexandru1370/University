@@ -38,6 +38,6 @@ private:
 	int number_of_nodes;
 	int number_of_edges;
 	int deleted_nodes;
-
+	bool check_for_same_extension(char* name1, const char* extension);
 };
 

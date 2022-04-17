@@ -94,14 +94,16 @@ int TrenchService::search_trench(int size, char colour[], int price)
 	/// <param name="colour"></param>
 	/// <param name="price"></param>
 	/// <returns></returns>
+	int index = 0;
 	std::vector<Trench> trenches = repository->get_all();
-	for (size_t index = 0; index < trenches.size(); index++)
+	for (Trench trench : trenches)
 	{
-		Trench trench = trenches[index];
+		//Trench trench = trenches[index];
 		if (strcmp(trench.get_color(), colour) == 0 && trench.get_size() == size && trench.get_price() == price)
 		{
 			return index;
 		}
+		index++;
 	}
 	return -1;
 }

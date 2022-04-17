@@ -2,6 +2,17 @@
 #include "Vector.h"
 #include "Trench.h"
 #include <vector>
+#include <exception>
+#include <string>
+
+class RepositoryException : std::exception 
+{
+public:
+	RepositoryException(std::string error);
+	const char* what() const noexcept override;
+private:
+	std::string message;
+};
 
 class Repository
 {

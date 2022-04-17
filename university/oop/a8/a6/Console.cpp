@@ -2,6 +2,7 @@
 #include "Utils.h"
 #include <iostream>
 #include <string>
+#include "TrenchValidator.h"
 #define clear_buffer() fseek(stdin, 0, SEEK_END)
 Console::Console(TrenchService* _service)
 {
@@ -130,9 +131,9 @@ void Console::print_trenches(int size = 0)
 {
 	//Vector* list = service->get_all();
 	std::vector<Trench> list = service->get_all();
-	for (size_t index = 0; index < list.size(); index++)
+	for (Trench trench : list)
 	{
-		Trench trench = list[index];
+		//Trench trench = list[index];
 		if (size == 0)
 		{
 			/*printf("size = %d colour = %s price = %d quantity = %d photograph = %s\n",
@@ -142,7 +143,7 @@ void Console::print_trenches(int size = 0)
 				trench.get_quantity(),
 				trench.get_photograph()
 			);*/
-			cout << trench<<"\n";
+			cout << trench << "\n";
 		}
 		else if (trench.get_size() == size)
 		{
@@ -154,9 +155,9 @@ void Console::print_trenches(int size = 0)
 				trench.get_photograph()
 			);*/
 			cout << trench << "\n";
-			
+
 		}
-		
+
 	}
 }
 
@@ -181,9 +182,14 @@ void Console::add_trench()
 	{
 		service->add_element(size, color, price, quantity, photograph);
 	}
-	catch (const std::exception&)
+	catch (const TrenchValidatorException tve)
 	{
-		printf("Element already exists in the repository!\n");
+		cout << tve.what();
+		//printf("Element already exists in the repository!\n");
+	}
+	catch (const RepositoryException re)
+	{
+		cout << re.what();
 	}
 }
 
@@ -195,7 +201,14 @@ void Console::update_trench()
 	scanf("%d", &index);
 	printf("new quantity=");
 	scanf("%d", &quantity);
-	service->update_element(index, quantity);
+	try
+	{
+		service->update_element(index, quantity);
+	}
+	catch (const TrenchValidatorException tve)
+	{
+		cout << tve.what();
+	}
 }
 
 void Console::delete_trench()
@@ -231,7 +244,7 @@ void Console::user_buy_trench_ui(int size)
 					list[index].get_quantity(),
 					list[index].get_photograph()
 				);*/
-				cout << list[index]<<"\n";
+				cout << list[index] << "\n";
 				printf("Press 1 to buy or press 0 to skip or press 2 to exit.\n your choose=");
 				scanf("%d", &user_buy_option);
 				if (user_buy_option == 1)
@@ -259,9 +272,9 @@ void Console::print_shopping_basket()
 {
 	std::vector<Trench> list = service->get_elements_in_shopping_basket();
 	int sum = 0;
-	for (size_t index = 0; index < list.size(); index++)
+	for (Trench trench : list)
 	{
-		Trench trench = list[index];
+		//Trench trench = list[index];
 		/*printf("size = %d colour = %s price = %d quantity = %d photograph = %s\n",
 			trench.get_size(),
 			trench.get_color(),
