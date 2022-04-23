@@ -182,6 +182,7 @@ std::ostream& operator<<(std::ostream & os, Trench & trench)
 		" price = " << trench.get_price() <<
 		" quantity = " << trench.get_quantity() <<
 		" photograph = " << trench.get_photograph();*/
+	//output de consola
 	if (os.rdbuf() == std::cout.rdbuf())
 	{
 		os << "size = " << trench.get_size() <<
@@ -190,7 +191,7 @@ std::ostream& operator<<(std::ostream & os, Trench & trench)
 			" quantity = " << trench.get_quantity() <<
 			" photograph = " << trench.get_photograph();
 	}
-	else {
+	else {//output fisier
 		os << trench.get_size() <<
 			" " << trench.get_color() <<
 			" " << trench.get_price() <<
@@ -198,7 +199,6 @@ std::ostream& operator<<(std::ostream & os, Trench & trench)
 			" " << trench.get_photograph();
 	}
 
-	// TODO: insert return statement here
 	return os;
 }
 

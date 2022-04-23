@@ -51,13 +51,12 @@ void Repository::update_at(int index, Trench new_element)
 	data[index] = new_element;
 }
 
-std::vector<Trench> Repository::get_all()
+std::vector<Trench>& Repository::get_all()
 {
 	/// <summary>
 	/// Retrieve all the data in the repository
 	/// </summary>
 	/// <returns>Vector with all data</returns>
-
 	return data;
 	
 }

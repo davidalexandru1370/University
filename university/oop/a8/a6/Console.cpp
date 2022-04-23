@@ -13,7 +13,12 @@ Console::Console(TrenchService* _service)
 void Console::run_console()
 {
 	int running = 1;
-
+	while (output_extension != "csv" && output_extension != "html")
+	{
+		std::cout << "output extension=";
+		std::cin >> output_extension;
+	}
+	service->change_output_extension(output_extension);
 	//service->generate_random_trenches(10);
 	while (running)
 	{
@@ -237,13 +242,6 @@ void Console::user_buy_trench_ui(int size)
 			int user_buy_option = 0;
 			if (list[index].get_quantity() > 0)
 			{
-				/*printf("size = %d colour = %s price = %d quantity = %d photograph = %s\n",
-					list[index].get_size(),
-					list[index].get_color(),
-					list[index].get_price(),
-					list[index].get_quantity(),
-					list[index].get_photograph()
-				);*/
 				cout << list[index] << "\n";
 				printf("Press 1 to buy or press 0 to skip or press 2 to exit.\n your choose=");
 				scanf("%d", &user_buy_option);
@@ -251,7 +249,7 @@ void Console::user_buy_trench_ui(int size)
 				{
 					if (list[index].get_quantity() >= 1)
 					{
-						service->add_element_in_shopping_basket(list[index]);
+						service->add_element_in_shopping_basket(list[index],index);
 						index--;
 					}
 				}
@@ -270,19 +268,13 @@ void Console::user_buy_trench_ui(int size)
 
 void Console::print_shopping_basket()
 {
+	//system(((char*)"./user_output.") + output_extension);
+	system(((std::string)"user_output." + output_extension).c_str());
 	std::vector<Trench> list = service->get_elements_in_shopping_basket();
 	int sum = 0;
 	for (Trench trench : list)
 	{
-		//Trench trench = list[index];
-		/*printf("size = %d colour = %s price = %d quantity = %d photograph = %s\n",
-			trench.get_size(),
-			trench.get_color(),
-			trench.get_price(),
-			trench.get_quantity(),
-			trench.get_photograph()
-		);*/
-		cout << trench;
+		cout << trench << "\n";
 		sum += trench.get_price() * trench.get_quantity();
 	}
 	printf("Total sum=%d\n", sum);

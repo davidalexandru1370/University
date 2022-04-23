@@ -1,0 +1,2 @@
+C:\Users\David\Desktop\university\university\oop\a8\bonusProject\Debug\bonusProject.exe
+C:\Users\David\Desktop\university\university\oop\a8\bonusProject\Debug\bonusProject.pdb

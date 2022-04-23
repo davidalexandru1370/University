@@ -6,7 +6,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-TrenchService::TrenchService(TrenchFileRepository* _repository, UserFileRepository* _user_repository)
+TrenchService::TrenchService(Repository* _repository, Repository* _user_repository)
 {
 	/// <summary>
 	/// Constructor for trench service
@@ -60,7 +60,7 @@ void TrenchService::delete_element(int index)
 	Trench copy = repository->get_all()[index];
 	//copy = new Trench(copy.get_size(), copyget_quantity(), copy->get_color(), copy->get_price(), copy->get_photograph());
 	repository->remove_at(index);
-	user_repository->remove_by_name(copy.get_color());
+	((UserRepository*)user_repository)->remove_by_name(copy.get_color());
 }
 
 void TrenchService::update_element(int index, int new_quantity)
@@ -80,7 +80,7 @@ void TrenchService::update_element(int index, int new_quantity)
 	repository->update_at(index, *new_trench);
 }
 
-std::vector<Trench> TrenchService::get_all()
+std::vector<Trench>& TrenchService::get_all()
 {
 	return repository->get_all();
 }
@@ -126,7 +126,7 @@ void TrenchService::generate_random_trenches(int count)
 	}
 }
 
-void TrenchService::add_element_in_shopping_basket(Trench &element)
+void TrenchService::add_element_in_shopping_basket(Trench &element,int index)
 {
 	/// <summary>
 	/// Add element in shopping basket
@@ -134,7 +134,10 @@ void TrenchService::add_element_in_shopping_basket(Trench &element)
 	/// <param name="element"></param>
 	/*Trench* copy = new Trench(element->get_size(), element->get_quantity(), element->get_color(), element->get_price(), element->get_photograph());
 	element->set_quantity(element->get_quantity() - 1);*/
+	Trench trench_copy = element;
+	trench_copy.set_quantity(element.get_quantity()-1);
 	element.set_quantity(element.get_quantity()-1);
+	repository->update_at(index, trench_copy);
 	user_repository->add_element(element);
 }
 
@@ -145,5 +148,10 @@ std::vector<Trench> TrenchService::get_elements_in_shopping_basket()
 	/// </summary>
 	/// <returns></returns>
 	return user_repository->get_all();
+}
+
+void TrenchService::change_output_extension(std::string extension)
+{
+	static_cast<UserFileRepository*>(user_repository)->set_output_extension(extension);
 }
 

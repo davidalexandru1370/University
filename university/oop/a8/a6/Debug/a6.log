@@ -3,6 +3,7 @@
   Repository.cpp
 C:\Users\David\Desktop\university\university\oop\a8\a6\Repository.cpp(11,28): warning C4018: '>=': signed/unsigned mismatch
   Tests.cpp
+  Trench.cpp
   TrenchFileRepository.cpp
   TrenchRepository.cpp
   TrenchService.cpp

@@ -5,9 +5,8 @@
 
 class UserRepository : public Repository
 {
-private:
+protected:
 	int check_if_element_exists(Trench &element) override;
-
 public:
 	UserRepository();
 	~UserRepository();
