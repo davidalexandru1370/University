@@ -1,0 +1,2 @@
+C:\Users\David\Desktop\university\university\graphs algorithms\lab3\ford\Debug\ford.exe
+C:\Users\David\Desktop\university\university\graphs algorithms\lab3\ford\Debug\ford.pdb

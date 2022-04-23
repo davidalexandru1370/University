@@ -1,0 +1,7 @@
+﻿  Graph.cpp
+C:\Users\David\Desktop\university\university\graphs algorithms\lab3\lab2\Graph.cpp(231,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\graphs algorithms\lab3\lab2\Graph.cpp(238,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\graphs algorithms\lab3\lab2\Graph.cpp(251,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\graphs algorithms\lab3\lab2\Graph.cpp(258,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\David\Desktop\university\university\graphs algorithms\lab3\lab2\Graph.cpp(306,31): warning C4018: '<': signed/unsigned mismatch
+  Lab1Graphs.vcxproj -> C:\Users\David\Desktop\university\university\graphs algorithms\lab3\lab2\Debug\Lab1Graphs.exe
